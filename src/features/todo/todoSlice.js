@@ -1,7 +1,7 @@
 import { createSlice,nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
-    todos : [{id:1,text : 'Hello Redux',status : false}]
+    todos : [{id:1,text : 'Welcome to Todo List',status : false}]
 }
 
 export const todoSlice = createSlice({
@@ -18,7 +18,7 @@ export const todoSlice = createSlice({
        completedTodo : (state,action) => {
             const todo = state.todos.find((todo) => todo.id === action.payload);
             if(todo){
-                todo.status = true;
+                todo.status = !todo.status;
             }
        },
        updateTodo : (state,action) => {
