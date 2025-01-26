@@ -23,15 +23,19 @@ function Todos() {
                   {todo.status ? <SquareCheck color="gray" /> : <Square />}
                 </button>
 
-                <p
-                  className={
-                    !todo.status
-                      ? "w-full text-grey-darkest"
-                      : "w-full text-gray-700 line-through"
-                  }
-                >
-                  {todo.text}
-                </p>
+                <div className="w-full">
+                  <p
+                    className={
+                      !todo.status
+                        ? "text-grey-darkest"
+                        : "text-gray-700 line-through"
+                    }
+                  >
+                    {todo.task}
+                  </p>
+
+                  <p className="text-gray-500 text-sm">{todo.description}</p>
+                </div>
 
                 <button
                   className="flex-no-shrink p-2 ml-2 border-2 bg-transparent hover:bg-red-500 text-red-700 
@@ -46,6 +50,7 @@ function Todos() {
           <hr className="my-2" />
           <h2 className="font-semibold text-lg mb-4 text-gray-600">Completed Tasks</h2>
 
+          {/*Completed Tasks*/}
           {todos
             .filter((todo) => todo.status)
             .map((todo) => (
@@ -57,15 +62,19 @@ function Todos() {
                   {todo.status ? <SquareCheck color="gray" /> : <Square />}
                 </button>
 
-                <p
-                  className={
-                    !todo.status
-                      ? "w-full text-grey-darkest"
-                      : "w-full text-gray-700 line-through"
-                  }
-                >
-                  {todo.text}
-                </p>
+                <div className="w-full">
+                  <p
+                    className={
+                      !todo.status
+                        ? "text-grey-darkest"
+                        : "text-gray-700 line-through"
+                    }
+                  >
+                    {todo.task}
+                  </p>
+
+                  <p className="text-gray-500 text-sm">{todo.description}</p>
+                </div>
 
                 <button
                   className="flex-no-shrink p-2 ml-2 border-2 bg-transparent hover:bg-red-500 text-red-700 

@@ -3,38 +3,53 @@ import { useDispatch } from "react-redux";
 import { addTodo } from "../features/todo/todoSlice";
 
 function AddTodo() {
-  const [input, setInput] = useState("");
+  const [task, setTask] = useState("");
+  const [description, setDescription] = useState("");
   const dispatch = useDispatch();
 
   const addTodoHandler = (e) => {
     e.preventDefault();
-    if (input.trim() == "") {
+    if (task.trim() == "") {
       alert("Enter a valid input");
       return;
     }
-    dispatch(addTodo(input));
-    setInput("");
+
+    const newTask = {
+      task: task,
+      description: description,
+    };
+    dispatch(addTodo(newTask));
+    setTask("");
+    setDescription("");
   };
+
   return (
     <>
       <div className="flex justify-center">
-        <form onSubmit={addTodoHandler} className="w-full max-w-sm">
-          <div className="flex items-center border-b border-teal-500 py-2">
-            <input
-              type="text"
-              placeholder="write Todo item"
-              id="inputField"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
-            >
-              ADD
-            </button>
-          </div>
+        <form
+          className="w-full max-w-sm flex flex-col p-3 bg-white shadow-md rounded-md m-3"
+          onSubmit={addTodoHandler}
+        >
+          <input
+            type="text"
+            placeholder="Winter is Coming"
+            className="mb-2 h-10 border border-black focus:outline-none rounded-md p-2 font-medium text-lg"
+            onChange={(e) => setTask(e.target.value)}
+            value={task}
+          />
+          <input
+            type="text"
+            placeholder="Description"
+            className="mb-2 h-8 p-2 border border-black rounded-md text-gray-500 focus:outline-none text-base"
+            onChange={(e) => setDescription(e.target.value)}
+            value={description}
+          />
+          <button
+            type="submit"
+            className="bg-green-500 p-2 rounded-md  text-white focus:outline-none hover:bg-green-600  "
+          >
+            Add Task
+          </button>
         </form>
       </div>
     </>
