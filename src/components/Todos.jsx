@@ -3,10 +3,35 @@ import { removeTodo, completedTodo } from "../features/todo/todoSlice";
 import { Trash, Square, SquareCheck } from "lucide-react";
 import { Separator } from "@radix-ui/react-separator";
 import { Button } from "./ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@radix-ui/react-dialog";
+import { DialogFooter, DialogHeader } from "./ui/dialog";
+import { useState } from "react";
 
 function Todos() {
   const todos = useSelector((state) => state.todos);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedTask, setSelectedTask] = useState({});
   const dispatch = useDispatch();
+
+  const handleDelete = (task) => {
+    setSelectedTask(task);
+    setIsDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = () => {
+    if (selectedTask) {
+      dispatch(removeTodo(selectedTask.id));
+      setIsDialogOpen(false);
+      setSelectedTask({});
+    }
+  };
+
   return (
     <>
       <div className="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
@@ -41,7 +66,7 @@ function Todos() {
 
                 <Button
                   className="flex-no-shrink p-2 ml-2  py-2 px-4"
-                  onClick={() => dispatch(removeTodo(todo.id))}
+                  onClick={() => handleDelete(todo)}
                   variant="destructive"
                 >
                   <Trash />
@@ -49,8 +74,10 @@ function Todos() {
               </div>
             ))}
 
-          <Separator className="my-4"/>
-          <h2 className="font-semibold text-lg mb-4 text-gray-600">Completed Tasks</h2>
+          <Separator className="my-4" />
+          <h2 className="font-semibold text-lg mb-4 text-gray-600">
+            Completed Tasks
+          </h2>
 
           {/*Completed Tasks*/}
           {todos
@@ -78,17 +105,47 @@ function Todos() {
                   <p className="text-gray-500 text-sm">{todo.description}</p>
                 </div>
 
-                <button
-                  className="flex-no-shrink p-2 ml-2 border-2 bg-transparent hover:bg-red-500 text-red-700 
-                font-semibold hover:text-white py-2 px-4 border-red-500 hover:border-transparent rounded"
-                  onClick={() => dispatch(removeTodo(todo.id))}
+                <Button
+                  className="flex-no-shrink p-2 ml-2  py-2 px-4"
+                  onClick={() => handleDelete(todo)}
+                  variant="destructive"
                 >
                   <Trash />
-                </button>
+                </Button>
               </div>
             ))}
         </div>
       </div>
+
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} modal={true}>
+        <div
+          className={
+            isDialogOpen ? "fixed inset-0 bg-gray-300 bg-opacity-30 z-10" : ""
+          }
+        ></div>
+        <DialogContent className="flex items-center justify-center fixed top-20 inset-x-0 z-20">
+          <div className="w-full max-w-sm p-4 rounded-lg shadow-sm bg-white">
+            <DialogHeader>
+              <DialogTitle className="font-bold">Delete Task?</DialogTitle>
+              <DialogDescription>
+                The <span className="font-semibold">{selectedTask.task}</span>{" "}
+                task will be permanently deleted
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="mt-4">
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button variant="secondary">Cancel</Button>
+                </DialogClose>
+                <Button variant="destructive" onClick={handleDeleteConfirm}>
+                  Delete
+                </Button>
+              </DialogFooter>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
