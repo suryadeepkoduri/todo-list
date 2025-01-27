@@ -1,6 +1,17 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../features/todo/todoSlice";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import { Label } from "./ui/label";
 
 function AddTodo() {
   const [task, setTask] = useState("");
@@ -25,32 +36,47 @@ function AddTodo() {
 
   return (
     <>
-      <div className="flex justify-center">
-        <form
-          className="w-full max-w-sm flex flex-col p-3 bg-white shadow-md rounded-md m-3"
-          onSubmit={addTodoHandler}
-        >
-          <input
-            type="text"
-            placeholder="Winter is Coming"
-            className="mb-2 h-10 border border-black focus:outline-none rounded-md p-2 font-medium text-lg"
-            onChange={(e) => setTask(e.target.value)}
-            value={task}
-          />
-          <input
-            type="text"
-            placeholder="Description"
-            className="mb-2 h-8 p-2 border border-black rounded-md text-gray-500 focus:outline-none text-base"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-          />
-          <button
-            type="submit"
-            className="bg-green-500 p-2 rounded-md  text-white focus:outline-none hover:bg-green-600  "
-          >
-            Add Task
-          </button>
-        </form>
+      <div className="flex justify-center mt-2">
+        <Card className="w-full max-w-sm">
+          <CardHeader>
+            <CardTitle>Add Task</CardTitle>
+            <CardDescription>Add task to complete it later</CardDescription>
+          </CardHeader>
+
+          <CardContent>
+            <form onSubmit={addTodoHandler} id="add-task">
+              <div>
+                <Label htmlFor="task">Task</Label>
+                <Input
+                  id="task"
+                  type="text"
+                  placeholder="Add Task"
+                  className="my-2"
+                  onChange={(e) => setTask(e.target.value)}
+                  value={task}
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="description">Description</Label>
+                <Input
+                  id="description"
+                  type="text"
+                  placeholder="Add Description"
+                  className="my-2"
+                  onChange={(e) => setDescription(e.target.value)}
+                  value={description}
+                />
+              </div>
+            </form>
+          </CardContent>
+
+          <CardFooter className="flex float-end">
+            <Button form="add-task" type="submit">
+              Add Task
+            </Button>
+          </CardFooter>
+        </Card>
       </div>
     </>
   );

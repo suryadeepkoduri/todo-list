@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { removeTodo, completedTodo } from "../features/todo/todoSlice";
 import { Trash, Square, SquareCheck } from "lucide-react";
+import { Separator } from "@radix-ui/react-separator";
+import { Button } from "./ui/button";
 
 function Todos() {
   const todos = useSelector((state) => state.todos);
@@ -37,17 +39,17 @@ function Todos() {
                   <p className="text-gray-500 text-sm">{todo.description}</p>
                 </div>
 
-                <button
-                  className="flex-no-shrink p-2 ml-2 border-2 bg-transparent hover:bg-red-500 text-red-700 
-                font-semibold hover:text-white py-2 px-4 border-red-500 hover:border-transparent rounded"
+                <Button
+                  className="flex-no-shrink p-2 ml-2  py-2 px-4"
                   onClick={() => dispatch(removeTodo(todo.id))}
+                  variant="destructive"
                 >
                   <Trash />
-                </button>
+                </Button>
               </div>
             ))}
 
-          <hr className="my-2" />
+          <Separator className="my-4"/>
           <h2 className="font-semibold text-lg mb-4 text-gray-600">Completed Tasks</h2>
 
           {/*Completed Tasks*/}
