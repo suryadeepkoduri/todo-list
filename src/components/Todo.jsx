@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { completedTodo, removeTodo } from "@/features/todo/todoSlice";
-import { SquareCheck, Square, Trash } from "lucide-react";
+import { Trash, CircleCheck,Circle } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import {
@@ -22,8 +22,6 @@ function Todo({ todo }) {
     setIsDialogOpen(false);
   };
 
-  console.log(todo);
-
   return (
     <>
       <div className="flex mb-4 items-center">
@@ -31,7 +29,7 @@ function Todo({ todo }) {
           className="flex-no-shrink p-1 ml-2 mr-2 bg-transparent font-semibold rounded"
           onClick={() => dispatch(completedTodo(todo.id))}
         >
-          {todo.status ? <SquareCheck color="gray" /> : <Square />}
+          {todo.status ? <CircleCheck color="gray" /> : <Circle/>}
         </button>
 
         <div className="w-full">
