@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { completedTodo, removeTodo } from "@/features/todo/todoSlice";
-import { Trash, CircleCheck,Circle } from "lucide-react";
+import { Trash, CircleCheck,Circle, PenLine } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import {
@@ -43,6 +43,13 @@ function Todo({ todo }) {
 
           <p className="text-gray-500 text-sm">{todo.description}</p>
         </div>
+
+        <Button
+          className="flex-no-shrink p-2 ml-2  py-2 px-4"
+          variant="secondary"
+        >
+          <PenLine/>
+        </Button>
 
         <Button
           className="flex-no-shrink p-2 ml-2  py-2 px-4"
