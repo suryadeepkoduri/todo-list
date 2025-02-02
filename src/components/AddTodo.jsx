@@ -12,10 +12,15 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Label } from "./ui/label";
+import { CalendarIcon, X } from "lucide-react";
+import { Calendar } from "./ui/calendar";
+import { Popover } from "@radix-ui/react-popover";
+import { PopoverContent, PopoverTrigger } from "./ui/popover";
 
 function AddTodo() {
   const [task, setTask] = useState("");
   const [description, setDescription] = useState("");
+  const [date, setDate] = useState(new Date());
   const dispatch = useDispatch();
 
   const addTodoHandler = (e) => {
@@ -28,6 +33,7 @@ function AddTodo() {
     const newTask = {
       task: task,
       description: description,
+      date : date.toISOString()
     };
     dispatch(addTodo(newTask));
     setTask("");
@@ -71,7 +77,32 @@ function AddTodo() {
             </form>
           </CardContent>
 
-          <CardFooter className="flex float-end">
+          <CardFooter className="flex justify-between gap-3">
+            <div className="flex items-center border rounded-md">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="ghost">
+                    {date ? date.toDateString() : (<CalendarIcon />)}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    initialFocus
+                    disabled={(d) =>
+                      d < new Date(new Date().setHours(0, 0, 0, 0))
+                    }
+                  />
+                </PopoverContent>
+              </Popover>
+              {date && (
+                <Button variant="ghost" onClick={() => setDate(null)}>
+                  <X />
+                </Button>
+              )}
+            </div>
             <Button form="add-task" type="submit">
               Add Task
             </Button>

@@ -25,6 +25,7 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import { DropdownMenuSeparator } from "./ui/dropdown-menu";
+import { Badge } from "./ui/badge";
 
 function Todo({ todo }) {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ function Todo({ todo }) {
           </p>
 
           <p className="text-gray-500 text-sm">{todo.description}</p>
+          {todo.date && <Badge variant="secondary" className="mt-2" >{new Date(todo.date).toDateString()}</Badge>}
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger>
