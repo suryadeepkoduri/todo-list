@@ -38,6 +38,7 @@ function AddTodo() {
     dispatch(addTodo(newTask));
     setTask("");
     setDescription("");
+    setDate(new Date())
   };
 
   return (
