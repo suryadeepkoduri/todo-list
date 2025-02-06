@@ -1,6 +1,6 @@
-# Todo List 
+# Karma
 
-This is a basic Todo List application built using React.js and Redux Toolkit for state management.
+A Todo List application built using React.js and Redux Toolkit for state management.
 
 ## Installation
 1. Clone the repository
