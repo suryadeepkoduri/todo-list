@@ -4,7 +4,7 @@ import Todo from "./Todo";
 import { Badge } from "./ui/badge";
 
 function Todos() {
-  const todos = useSelector((state) => state.todos);
+  const todos = useSelector((state) => state.todo.todos);
   const activeTodos = todos.filter((todo) => !todo.status);
   const completedTodos = todos.filter((todo) => todo.status);
 

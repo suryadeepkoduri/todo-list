@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import {
-  completedTodo,
   removeTodo,
+  toggleTodoStatus,
   updateTodo,
 } from "@/features/todo/todoSlice";
 import { Trash, CircleCheck, Circle, PenLine, Ellipsis } from "lucide-react";
@@ -24,7 +24,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
-import { DropdownMenuSeparator } from "./ui/dropdown-menu";
 import { Badge } from "./ui/badge";
 
 function Todo({ todo }) {
@@ -59,7 +58,7 @@ function Todo({ todo }) {
       <div className="flex mb-4 items-center">
         <button
           className="flex-no-shrink p-1 ml-2 mr-2 bg-transparent font-semibold rounded"
-          onClick={() => dispatch(completedTodo(todo.id))}
+          onClick={() => dispatch(toggleTodoStatus(todo.id))}
         >
           {todo.status ? <CircleCheck color="gray" /> : <Circle />}
         </button>
