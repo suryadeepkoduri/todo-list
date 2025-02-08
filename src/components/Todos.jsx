@@ -11,10 +11,10 @@ function Todos() {
 
   return (
     <>
-      <div className="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
-        <Card className="m-4 w-full lg:w-3/4 lg:max-w-lg p-6">
+      <div className="flex items-center justify-center">
+        <Card className="m-4 w-full p-6 md:max-w-4xl">
           <div className="mb-4">
-            <h1 className="font-semibold text-lg">
+            <h1 className="font-semibold text-lg ml-1">
               Tasks<Badge className="ml-3">{activeTodos.length}</Badge>
             </h1>
           </div>
@@ -25,7 +25,7 @@ function Todos() {
           {completedTodos.length > 0 && (
             <div>
               <Separator className="my-4 border" />
-              <h2 className="font-semibold text-lg mb-4 text-muted-foreground">
+              <h2 className="font-semibold text-lg mb-4 text-muted-foreground ml-1">
                 Completed Tasks{" "}
                 <Badge variant="secondary" className="ml-3">
                   {completedTodos.length}

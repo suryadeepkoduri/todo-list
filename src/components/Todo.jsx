@@ -55,18 +55,20 @@ function Todo({ todo }) {
 
   return (
     <>
-      <div className="flex mb-4 items-center">
+      <div className="flex mb-4 items-start">
         <button
-          className="flex-no-shrink p-1 ml-2 mr-2 bg-transparent font-semibold rounded"
+          className="flex-no-shrink p-1 mr-1"
           onClick={() => dispatch(toggleTodoStatus(todo.id))}
         >
-          {todo.status ? <CircleCheck color="gray" /> : <Circle />}
+          {todo.status ? <CircleCheck color="gray" size={22}/> : <Circle size={22} />}
         </button>
 
         <div className="w-full">
           <p
             className={
-              !todo.status ? "text-foreground" : "text-muted-foreground line-through"
+              !todo.status
+                ? "text-foreground"
+                : "text-muted-foreground line-through"
             }
           >
             {todo.task}
@@ -74,7 +76,7 @@ function Todo({ todo }) {
 
           <p className="text-muted-foreground text-sm">{todo.description}</p>
           {todo.date && (
-            <Badge variant="secondary" className="mt-2">
+            <Badge variant="secondary" className="mt-2 rounded-sm">
               {new Date(todo.date).toDateString()}
             </Badge>
           )}
