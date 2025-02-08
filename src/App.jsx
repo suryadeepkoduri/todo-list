@@ -1,4 +1,3 @@
-import Page from "./app/dashboard/page";
 import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
 import Todos from "./components/Todos";

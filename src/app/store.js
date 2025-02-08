@@ -22,11 +22,11 @@ const saveState = (state) => {
 }
 
 
-const preLoadedState = {todo:loadState()};
+const preLoadedState = { todo: loadState() };
 
 export const store = configureStore({
-    reducer: {todo:todoReducer},
-    preloadedState:preLoadedState
+    reducer: { todo: todoReducer },
+    preloadedState: preLoadedState
 })
 
 store.subscribe(() => {

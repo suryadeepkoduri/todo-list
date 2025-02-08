@@ -14,6 +14,8 @@ import Page from "./app/dashboard/page";
 import Today from "./components/sections/Today";
 import Upcoming from "./components/sections/Upcoming";
 import Inbox from "./components/sections/Inbox";
+import { ThemeProvider } from "./components/darkmode/theme-provider";
+import { Children } from "react";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

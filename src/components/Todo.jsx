@@ -66,13 +66,13 @@ function Todo({ todo }) {
         <div className="w-full">
           <p
             className={
-              !todo.status ? "text-grey-darkest" : "text-gray-700 line-through"
+              !todo.status ? "text-foreground" : "text-muted-foreground line-through"
             }
           >
             {todo.task}
           </p>
 
-          <p className="text-gray-500 text-sm">{todo.description}</p>
+          <p className="text-muted-foreground text-sm">{todo.description}</p>
           {todo.date && (
             <Badge variant="secondary" className="mt-2">
               {new Date(todo.date).toDateString()}
@@ -88,7 +88,7 @@ function Todo({ todo }) {
           <DropdownMenuContent className="w-52">
             <DropdownMenuItem>
               <div
-                className="flex gap-3 text-gray-900 cursor-pointer"
+                className="flex gap-3 cursor-pointer"
                 onClick={() => setEditing(true)}
               >
                 <PenLine size={18} /> Edit Task
@@ -96,7 +96,7 @@ function Todo({ todo }) {
             </DropdownMenuItem>
             <DropdownMenuItem>
               <div
-                className="flex gap-3 text-red-700 cursor-pointer"
+                className="flex gap-3 text-destructive cursor-pointer"
                 onClick={() => setIsDialogOpen(true)}
               >
                 <Trash size={18} /> Delete Task

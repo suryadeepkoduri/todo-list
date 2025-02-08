@@ -33,12 +33,12 @@ function AddTodo() {
     const newTask = {
       task: task,
       description: description,
-      date : date.toISOString()
+      date: date.toISOString(),
     };
     dispatch(addTodo(newTask));
     setTask("");
     setDescription("");
-    setDate(new Date())
+    setDate(new Date());
   };
 
   return (
@@ -83,7 +83,7 @@ function AddTodo() {
               <Popover>
                 <PopoverTrigger asChild>
                   <Button variant="ghost">
-                    {date ? date.toDateString() : (<CalendarIcon />)}
+                    {date ? date.toDateString() : <CalendarIcon />}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0">

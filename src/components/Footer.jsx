@@ -2,7 +2,7 @@ import { Github, Twitter } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="w-full py-4 bg-gray-50 text-center">
+    <footer className="w-full py-4 bg-primary-foreground text-center">
       <p className="mb-2">© {new Date().getFullYear()} Surya Deep Koduri</p>
       <div className="flex justify-center space-x-4">
         <a

@@ -1,7 +1,8 @@
 function Upcoming() {
-    return(
-        <div className="flex align-middle justify-center m-auto">
-        <div className="flex flex-col items-center">
+  document.title = "Upcoming - Karma"
+  return (
+    <div className="flex align-middle justify-center m-auto">
+      <div className="flex flex-col items-center">
         <svg
           fill="#000000"
           version="1.1"
@@ -10,6 +11,7 @@ function Upcoming() {
           viewBox="0 0 32.811 32.811"
           xmlSpace="preserve"
           height="200"
+          className="dark:fill-white"
         >
           <g>
             <path
@@ -44,9 +46,9 @@ function Upcoming() {
           </g>
         </svg>
         <p className="text-3xl font-semibold">Coming Soon!! </p>
-        </div>
       </div>
-    )
+    </div>
+  );
 }
 
 export default Upcoming;

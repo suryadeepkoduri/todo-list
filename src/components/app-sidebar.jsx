@@ -47,6 +47,7 @@ export function AppSidebar({ ...props }) {
                     viewBox="0 0 32.811 32.811"
                     xmlSpace="preserve"
                     height="200"
+                    className="dark:fill-white"
                   >
                     <g>
                       <path

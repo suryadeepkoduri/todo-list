@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { Separator } from "@radix-ui/react-separator";
 import Todo from "./Todo";
 import { Badge } from "./ui/badge";
+import { Card } from "./ui/card";
 
 function Todos() {
   const todos = useSelector((state) => state.todo.todos);
@@ -11,7 +12,7 @@ function Todos() {
   return (
     <>
       <div className="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
-        <div className="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
+        <Card className="m-4 w-full lg:w-3/4 lg:max-w-lg p-6">
           <div className="mb-4">
             <h1 className="font-semibold text-lg">
               Tasks<Badge className="ml-3">{activeTodos.length}</Badge>
@@ -21,21 +22,23 @@ function Todos() {
             <Todo todo={todo} key={todo.id} />
           ))}
 
-          <Separator className="my-4" />
           {completedTodos.length > 0 && (
-            <h2 className="font-semibold text-lg mb-4 text-gray-600">
-              Completed Tasks{" "}
-              <Badge variant="secondary" className="ml-3">
-                {completedTodos.length}
-              </Badge>
-            </h2>
+            <div>
+              <Separator className="my-4 border" />
+              <h2 className="font-semibold text-lg mb-4 text-muted-foreground">
+                Completed Tasks{" "}
+                <Badge variant="secondary" className="ml-3">
+                  {completedTodos.length}
+                </Badge>
+              </h2>
+            </div>
           )}
 
           {/*Completed Tasks*/}
           {completedTodos.map((todo) => (
             <Todo todo={todo} key={todo.id} />
           ))}
-        </div>
+        </Card>
       </div>
     </>
   );
