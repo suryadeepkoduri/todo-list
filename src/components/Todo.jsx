@@ -14,16 +14,16 @@ import {
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@radix-ui/react-dialog";
+} from "./ui/dialog";
 import { DialogFooter, DialogHeader } from "./ui/dialog";
-import { Label } from "@radix-ui/react-label";
+import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
+} from "./ui/dropdown-menu";
 import { Badge } from "./ui/badge";
 
 function Todo({ todo }) {
@@ -73,7 +73,11 @@ function Todo({ todo }) {
           </p>
 
           <p className="text-gray-500 text-sm">{todo.description}</p>
-          {todo.date && <Badge variant="secondary" className="mt-2" >{new Date(todo.date).toDateString()}</Badge>}
+          {todo.date && (
+            <Badge variant="secondary" className="mt-2">
+              {new Date(todo.date).toDateString()}
+            </Badge>
+          )}
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger>
@@ -81,10 +85,10 @@ function Todo({ todo }) {
               <Ellipsis />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-52 bg-white border rounded-md shadow-sm text-sm p-1">
+          <DropdownMenuContent className="w-52">
             <DropdownMenuItem>
               <div
-                className="hover:bg-gray-100 p-3 flex gap-3 text-gray-900 cursor-pointer rounded-md"
+                className="flex gap-3 text-gray-900 cursor-pointer"
                 onClick={() => setEditing(true)}
               >
                 <PenLine size={18} /> Edit Task
@@ -92,7 +96,7 @@ function Todo({ todo }) {
             </DropdownMenuItem>
             <DropdownMenuItem>
               <div
-                className="hover:bg-gray-100 p-3 flex gap-3 text-red-700 cursor-pointer rounded-md"
+                className="flex gap-3 text-red-700 cursor-pointer"
                 onClick={() => setIsDialogOpen(true)}
               >
                 <Trash size={18} /> Delete Task
@@ -104,81 +108,67 @@ function Todo({ todo }) {
 
       {/* Delete Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} modal={true}>
-        <div
-          className={
-            isDialogOpen ? "fixed inset-0 bg-gray-300 bg-opacity-30 z-10" : ""
-          }
-        ></div>
-        <DialogContent className="flex items-center justify-center fixed top-20 inset-x-0 z-20">
-          <div className="w-full max-w-sm p-4 rounded-lg shadow-sm bg-white">
-            <DialogHeader>
-              <DialogTitle className="font-bold">Delete Task?</DialogTitle>
-              <DialogDescription>
-                The <span className="font-semibold">{todo.task}</span> task will
-                be permanently deleted
-              </DialogDescription>
-            </DialogHeader>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="font-bold">Delete Task?</DialogTitle>
+            <DialogDescription>
+              The <span className="font-semibold">{todo.task}</span> task will
+              be permanently deleted
+            </DialogDescription>
+          </DialogHeader>
 
-            <div className="mt-4">
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button variant="secondary">Cancel</Button>
-                </DialogClose>
-                <Button variant="destructive" onClick={handleDeleteConfirm}>
-                  Delete
-                </Button>
-              </DialogFooter>
-            </div>
+          <div className="mt-4">
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="secondary">Cancel</Button>
+              </DialogClose>
+              <Button variant="destructive" onClick={handleDeleteConfirm}>
+                Delete
+              </Button>
+            </DialogFooter>
           </div>
         </DialogContent>
       </Dialog>
 
       {/* Edit Dialog */}
       <Dialog open={isEditing} onOpenChange={setEditing} modal={true}>
-        <div
-          className={
-            isEditing ? "fixed inset-0 bg-gray-300 bg-opacity-30 z-10" : ""
-          }
-        ></div>
-        <DialogContent className="flex items-center justify-center fixed top-20 inset-x-0 z-20">
-          <div className="w-full max-w-sm p-4 rounded-lg shadow-sm bg-white">
-            <DialogHeader>
-              <DialogTitle className="font-bold">Edit Task</DialogTitle>
-              <form id="edit-task" onSubmit={handleTaskEdit}>
-                <div>
-                  <Label htmlFor="task">Task</Label>
-                  <Input
-                    id="task"
-                    type="text"
-                    placeholder="Task Name"
-                    className="my-2"
-                    defaultValue={todo.task}
-                  />
-                </div>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="font-bold">Edit Task</DialogTitle>
+            <form id="edit-task" onSubmit={handleTaskEdit}>
+              <div>
+                <Label htmlFor="task">Task</Label>
+                <Input
+                  id="task"
+                  type="text"
+                  placeholder="Task Name"
+                  className="my-2"
+                  defaultValue={todo.task}
+                />
+              </div>
 
-                <div>
-                  <Label htmlFor="description">Description</Label>
-                  <Input
-                    id="description"
-                    type="text"
-                    placeholder="Description"
-                    className="my-2"
-                    defaultValue={todo.description}
-                  />
-                </div>
-              </form>
-            </DialogHeader>
+              <div>
+                <Label htmlFor="description">Description</Label>
+                <Input
+                  id="description"
+                  type="text"
+                  placeholder="Description"
+                  className="my-2"
+                  defaultValue={todo.description}
+                />
+              </div>
+            </form>
+          </DialogHeader>
 
-            <div className="mt-4">
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button variant="secondary">Cancel</Button>
-                </DialogClose>
-                <Button form="edit-task" type="submit">
-                  Done
-                </Button>
-              </DialogFooter>
-            </div>
+          <div className="mt-4">
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="secondary">Cancel</Button>
+              </DialogClose>
+              <Button form="edit-task" type="submit">
+                Done
+              </Button>
+            </DialogFooter>
           </div>
         </DialogContent>
       </Dialog>
