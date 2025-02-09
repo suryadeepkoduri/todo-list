@@ -60,7 +60,11 @@ function Todo({ todo }) {
           className="flex-no-shrink p-1 mr-1"
           onClick={() => dispatch(toggleTodoStatus(todo.id))}
         >
-          {todo.status ? <CircleCheck color="gray" size={22}/> : <Circle size={22} />}
+          {todo.status ? (
+            <CircleCheck color="gray" size={22} />
+          ) : (
+            <Circle size={22} />
+          )}
         </button>
 
         <div className="w-full">
@@ -88,19 +92,13 @@ function Todo({ todo }) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-52">
-            <DropdownMenuItem>
-              <div
-                className="flex gap-3 cursor-pointer"
-                onClick={() => setEditing(true)}
-              >
+            <DropdownMenuItem onClick={() => setEditing(true)}>
+              <div className="flex gap-3 cursor-pointer p-1">
                 <PenLine size={18} /> Edit Task
               </div>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <div
-                className="flex gap-3 text-destructive cursor-pointer"
-                onClick={() => setIsDialogOpen(true)}
-              >
+            <DropdownMenuItem onClick={() => setIsDialogOpen(true)}>
+              <div className="flex gap-3 text-destructive cursor-pointer p-1">
                 <Trash size={18} /> Delete Task
               </div>
             </DropdownMenuItem>
