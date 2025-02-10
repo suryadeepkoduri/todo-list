@@ -16,16 +16,20 @@ import Upcoming from "./components/sections/Upcoming";
 import Inbox from "./components/sections/Inbox";
 import { ThemeProvider } from "./components/darkmode/theme-provider";
 import { Children } from "react";
+import NotFound from "./components/sections/NotFound";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Page />}>
-      <Route path="" element={<Navigate to="/todo" replace />} />
-      <Route path="todo" element={<App />} />
-      <Route path="today" element={<Today />} />
-      <Route path="upcoming" element={<Upcoming />} />
-      <Route path="inbox" element={<Inbox />} />
-    </Route>
+    <>
+      <Route path="/" element={<Page />}>
+        <Route path="" element={<Navigate to="/todo" replace />} />
+        <Route path="todo" element={<App />} />
+        <Route path="today" element={<Today />} />
+        <Route path="upcoming" element={<Upcoming />} />
+        <Route path="inbox" element={<Inbox />} />
+      </Route>
+      <Route path="*" element={<NotFound />} />
+    </>
   )
 );
 
