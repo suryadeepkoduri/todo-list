@@ -5,7 +5,15 @@ import {
   toggleTodoStatus,
   updateTodo,
 } from "@/features/todo/todoSlice";
-import { Trash, CircleCheck, Circle, PenLine, Ellipsis } from "lucide-react";
+import {
+  Trash,
+  CircleCheck,
+  Circle,
+  PenLine,
+  Ellipsis,
+  CalendarIcon,
+  X,
+} from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import {
@@ -25,11 +33,20 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Badge } from "./ui/badge";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Calendar } from "./ui/calendar";
 
 function Todo({ todo }) {
   const dispatch = useDispatch();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isEditing, setEditing] = useState(false);
+  const [date, setDate] = useState(() => {
+    if (todo.date) {
+      return new Date(todo.date);
+    } else {
+      return null;
+    }
+  });
 
   const handleDeleteConfirm = () => {
     dispatch(removeTodo(todo.id));
@@ -43,10 +60,12 @@ function Todo({ todo }) {
       alert("Task shouldn't be empty");
       return;
     }
+
     const task = {
       id: todo.id,
       task: editedTask,
       description: e.target.querySelector("#description").value,
+      date: date ? date.toISOString() : null,
     };
 
     dispatch(updateTodo(task));
@@ -158,6 +177,31 @@ function Todo({ todo }) {
                 />
               </div>
             </form>
+            <div className="flex">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="ghost">
+                    {date ? date.toDateString() : <CalendarIcon />}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    initialFocus
+                    disabled={(d) =>
+                      d < new Date(new Date().setHours(0, 0, 0, 0))
+                    }
+                  />
+                </PopoverContent>
+              </Popover>
+              {date && (
+                <Button variant="ghost" onClick={() => setDate(null)}>
+                  <X />
+                </Button>
+              )}
+            </div>
           </DialogHeader>
 
           <div className="mt-4">

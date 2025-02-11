@@ -34,6 +34,7 @@ export const todoSlice = createSlice({
             if (todo) {
                 todo.task = action.payload.task;
                 todo.description = action.payload.description;
+                todo.date = action.payload.date;
             }
         }
     }
